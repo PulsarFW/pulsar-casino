@@ -1,0 +1,48 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install zip
+        run: sudo apt install zip
+
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Bundle files
+        run: |
+          mkdir -p ./temp/pulsar-casino
+          cp ./{README.md,fxmanifest.lua} ./temp/pulsar-casino
+          cp -r ./{client,server,config,shared} ./temp/pulsar-casino
+          cd ./temp && zip -r ../pulsar-casino.zip ./pulsar-casino
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "PULSAR-CASINO ${{ github.ref_name }}"
+          body: |
+            ![Pulsar Framework](https://r2.fivemanage.com/GPYOH8Hq4GPyAY7czrgLe/pulsarbanner.png)
+
+            ## PULSAR-CASINO ${{ github.ref_name }}
+
+            Casino games — blackjack, roulette, slots, and the lucky wheel for Pulsar Framework.
+
+            ### Installation
+            1. Download `pulsar-casino.zip` below
+            2. Extract into your server's `resources` folder
+            3. Add `ensure pulsar-casino` to your `server.cfg`
+
+            ---
+            ![Pulsar Framework](https://img.shields.io/badge/Pulsar-Framework-7c3aed?style=flat-square)
+            ![Built for FiveM](https://img.shields.io/badge/Built_for-FiveM-F40552?style=flat-square)
+          files: pulsar-casino.zip
+          prerelease: false
