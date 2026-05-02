@@ -5,17 +5,17 @@ client_script("@pulsar-core/exports/cl_error.lua")
 client_script("@pulsar-pwnzor/client/check.lua")
 
 author("Dr Nick")
-version("v1.0.0")
+version("1.0.0")
 
 client_scripts({
-	"client/**/*.lua",
+  "client/**/*.lua",
 })
 
 server_scripts({
-	"config/**/*.lua",
-	"server/**/*.lua",
+  "config/**/*.lua",
+  "server/**/*.lua",
 })
 
 shared_scripts({
-	"shared/**/*.lua",
+  "shared/**/*.lua",
 })
