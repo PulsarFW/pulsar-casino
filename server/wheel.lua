@@ -15,7 +15,7 @@ AddEventHandler("Casino:Server:Startup", function()
             if data?.turbo then
                 local char = exports['pulsar-characters']:FetchCharacterSource(source)
 
-                if char and exports['pulsar-finance']:WalletHas(source, 7500) and exports.ox_inventory:ItemsHas(char:GetData("SID"), 1, "diamond_vip", 1) then
+                if char and exports['pulsar-finance']:WalletHas(source, 7500) and exports.ox_inventory:ItemsHas(char:GetData("SID"), "diamond_vip", 1) then
                     GlobalState["Casino:WheelStarted"] = {
                         Source = source,
                         Turbo = true,

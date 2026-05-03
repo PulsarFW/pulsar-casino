@@ -212,7 +212,7 @@ AddEventHandler("Casino:Server:Startup", function()
         local tableId, localChairId = data.table, data.chair
 
         if _roulette[tableId] and not _roulette[tableId].Seats[localChairId] then
-            if _rouletteTables[tableId].isVIP and not exports.ox_inventory:ItemsHas(char:GetData("SID"), 1, "diamond_vip", 1) then
+            if _rouletteTables[tableId].isVIP and not exports.ox_inventory:ItemsHas(char:GetData("SID"), "diamond_vip", 1) then
                 return cb(false, "vip")
             end
 
