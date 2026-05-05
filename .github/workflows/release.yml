@@ -12,18 +12,14 @@ jobs:
   create-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Install zip
-        run: sudo apt install zip
-
       - name: Get latest code
         uses: actions/checkout@v4
 
       - name: Bundle files
         run: |
-          mkdir -p ./temp/pulsar-casino
-          cp ./{README.md,fxmanifest.lua} ./temp/pulsar-casino
-          cp -r ./{client,server,config,shared} ./temp/pulsar-casino
-          cd ./temp && zip -r ../pulsar-casino.zip ./pulsar-casino
+          mkdir -p staging/pulsar-casino
+          rsync -a --exclude='.github' --exclude='node_modules' --exclude='staging' . staging/pulsar-casino/
+          cd staging && zip -r ../pulsar-casino.zip pulsar-casino/
 
       - name: Create release
         uses: softprops/action-gh-release@v2
